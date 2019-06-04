@@ -22,7 +22,7 @@ class Player
         p self
         p player
         Dir.mkdir("saved_game") unless Dir.exist?("saved_game")
-        file_name = "saved_game/#{self.name}.txt"
+        file_name ||= "saved_game/#{self.name}.txt"
         File.open(file_name, "w"){ |file| file.puts player}        
     end    
 
@@ -40,7 +40,7 @@ class Player
             next if [2,5,8,11].include?(i)
             word[i] = "_"
         end
-        word.join(" ")        
+        word       
     end
 
     def select_secret_word

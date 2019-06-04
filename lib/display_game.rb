@@ -44,7 +44,3 @@ class HangmanDisplay
         end                
     end
 end
-
-hang_man = HangmanDisplay.new 3
-hang_man.incorrect_guess = 4
-hang_man.display
