@@ -6,7 +6,7 @@ class Player
     attr_reader :name
 
     def initialize(name)
-        @name = name.downcase
+        @name = name
         @correct_point = 0
         @incorrect_point = 0
         @secret_word = select_secret_word
@@ -27,7 +27,7 @@ class Player
     end    
 
     def self.load_game(name)
-        file_name = "saved_game/#{name}.txt"
+        file_name = "saved_game/#{name.downcase}.txt"
         json = File.open(file_name, "r"){ |file| file.read }
         player = YAML.load(json)
     end
@@ -55,9 +55,3 @@ class Player
         
     end
 end
-
-
-new_player = Player.new "Trang"
-new_player.save_game
-player = Player.load_game "trang"
-p player

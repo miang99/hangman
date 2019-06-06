@@ -1,37 +1,21 @@
 class HangmanDisplay
 
-    attr_accessor :incorrect_guess
-
-    HANGMAN = ["+----+".rjust(20),
-               "|    |".rjust(20),
-               "     |".rjust(20),
-              "      |".rjust(20),
-              "      |".rjust(20),
-              "       |".rjust(20),
-              "=========".rjust(25),
+    HANGMAN = ["+----+".rjust(10),
+               "|    |".rjust(10),
+               "     |".rjust(10),
+              "      |".rjust(10),
+              "      |".rjust(10),
+              "       |".rjust(10),
+              "=========".rjust(12),
     ]    
 
-    def initialize(incorrect_guess = 0)
-        @incorrect_guess = incorrect_guess
-        puts @incorrect_guess
-        puts reload_hangman(HANGMAN)
+    def initialize(incorrect_guess)
+        reload_hangman(HANGMAN, incorrect_guess)
     end
 
     def display
-        update_hangman(@incorrect_guess, HANGMAN)
         puts HANGMAN
     end
-     
-    private
-
-    def reload_hangman(hangman)
-        if @incorrect_guess >0
-            for i in 1..@incorrect_guess do
-                update_hangman(i, hangman)
-            end 
-        end
-        hangman
-    end    
 
     def update_hangman(incorrect_guess, hangman)
         case incorrect_guess
@@ -43,4 +27,15 @@ class HangmanDisplay
         when 6 then hangman[4] ="/ \\   |".rjust(20)
         end                
     end
+     
+    private
+
+    def reload_hangman(hangman, incorrect_guess)
+        if incorrect_guess >0
+            for i in 1..incorrect_guess do
+                update_hangman(i, hangman)
+            end 
+        end
+        hangman
+    end    
 end
