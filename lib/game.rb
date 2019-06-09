@@ -5,6 +5,9 @@ class Game
     
     attr_reader :player, :hangman
 
+    include GameInterface
+    include Checking
+
     #set up the game
     def self.introduction
         puts 'Welcome to hangman'
@@ -46,15 +49,42 @@ class Game
     def initialize(player)
         @player = player
         @hangman = HangmanDisplay.new @player.incorrect_point
-        p self
-    end  
-    
-    def checking_result
-
+        puts "You have to guess this word: #{@player.display_guess_word}"
+        puts "The hang man now is like: "
+        @hangman.display
+        run_game
     end
 
-    def show_result
+    private
 
+    def run_game
+        loop do
+            game_flow
+            @hangman.update_hangman(@player.incorrect_point)
+            puts "The hangman now is: "
+            @hangman.display 
+            break if check_final_result()
+            break if ask_to_save_game(player)        
+        
+        end
+        
+    end
+
+    def game_flow
+        answer = ask_for_guess
+        checking_word(player: @player, answer: answer)
+        show_update_result(@player)
+        
+    end
+
+    def check_final_result
+        if win?(@player.guess_word)
+            show_win_result
+            return true
+        elsif lose?(@player.incorrect_point)
+            show_lose_result
+            return true
+        end
     end
 end
 

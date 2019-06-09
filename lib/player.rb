@@ -3,7 +3,7 @@ require "yaml"
 class Player
 
     attr_accessor :correct_point, :incorrect_point, :guess_word
-    attr_reader :name
+    attr_reader :name, :secret_word
 
     def initialize(name)
         @name = name
