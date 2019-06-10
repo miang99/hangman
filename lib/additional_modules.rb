@@ -28,7 +28,7 @@ module GameInterface
     end
 
     def show_lose_result
-        puts "You lose. Let\'s restart the game and play the game."
+        puts "You lose. Let\'s restart and play the game."
     end
 end
 
